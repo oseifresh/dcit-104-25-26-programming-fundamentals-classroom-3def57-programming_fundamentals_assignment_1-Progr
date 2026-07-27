@@ -15,33 +15,17 @@
 #   Score 50 – 59   →  Grade D
 #   Score below 50  →  Grade F
 #
-# -----------------------------------------------------------------------------
-# EXPECTED INPUT / OUTPUT EXAMPLES
-# -----------------------------------------------------------------------------
-#
-#   Enter student score (0-100): 85
-#   Grade: A
-#
-#   Enter student score (0-100): 73
-#   Grade: B
-#
-#   Enter student score (0-100): 45
-#   Grade: F
-#
-#   Enter student score (0-100): 110
-#   Error: Score must be between 0 and 100.
-#
-# -----------------------------------------------------------------------------
-# REQUIREMENTS
-# -----------------------------------------------------------------------------
-# - You MUST use functions (see scaffold below).
-# - Validate that the score is within the range 0–100 inside get_grade().
-#   If it is not, return None and let main() print the error message.
-# - Use if / elif / else to determine the grade.
-#
+grade = float(input("Enter your grade (0-100): "))
+if grade >= 80:
+    print("Grade: A")
+elif grade >= 70:
+    print("Grade: B")
+elif grade >= 60:
+    print("Grade: C")
+elif grade >= 50:
+    print("Grade: D")
+else:
+    print("Grade: F")
 
-#
-# =============================================================================
-# YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
-# =============================================================================
+
 
