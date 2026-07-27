@@ -7,64 +7,94 @@
 # Build a calculator program that runs in the console and performs basic
 # arithmetic operations based on the user's input.
 #
-# -----------------------------------------------------------------------------
-# OPERATIONS YOUR CALCULATOR MUST SUPPORT
-# -----------------------------------------------------------------------------
+# 
 #
-#   1. Addition          ( + )    e.g.  10 + 3  =  13
-#   2. Subtraction       ( - )    e.g.  10 - 3  =  7
-#   3. Multiplication    ( * )    e.g.  10 * 3  =  30
-#   4. Division          ( / )    e.g.  10 / 3  =  3.33
-#   5. Modulus           ( % )    e.g.  10 % 3  =  1  (remainder)
-#   6. Exponentiation    ( ** )   e.g.  2 ** 8  =  256
-#   7. Quit
-#
-# -----------------------------------------------------------------------------
-# HOW THE MENU SHOULD LOOK
-# -----------------------------------------------------------------------------
-#
-#   ============================
-#        SIMPLE CALCULATOR
-#   ============================
-#   1. Addition
-#   2. Subtraction
-#   3. Multiplication
-#   4. Division
-#   5. Modulus
-#   6. Exponentiation
-#   7. Quit
-#   Select an operation (1-7):
-#
-# -----------------------------------------------------------------------------
-# EXPECTED INTERACTION EXAMPLE
-# -----------------------------------------------------------------------------
-#
-#   Select an operation (1-7): 4
-#   Enter first number : 10
-#   Enter second number: 3
-#   Result: 10 / 3 = 3.33
-#
-#   Select an operation (1-7): 4
-#   Enter first number : 5
-#   Enter second number: 0
-#   Error: Cannot divide by zero.
-#
-#   Select an operation (1-7): 7
-#   Goodbye!
-#
-# -----------------------------------------------------------------------------
-# REQUIREMENTS
-# -----------------------------------------------------------------------------
-# - Each arithmetic operation MUST be written as its own function.
-# - Use a loop so the calculator keeps running until the user selects Quit.
-# - Division by zero must be caught and handled with a clear error message
-#   (do NOT let the program crash).
-# - Division results should be rounded to 2 decimal places.
-# - Handle invalid menu choices gracefully.
-#
+def add_numbers(a, b):
+    return a + b
 
-#
-# =============================================================================
-# YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
-# =============================================================================
+
+def subtract_numbers(a, b):
+    return a - b
+
+
+def multiply_numbers(a, b):
+    return a * b
+
+
+def divide_numbers(a, b):
+    if b == 0:
+        raise ZeroDivisionError("Cannot divide by zero.")
+    return round(a / b, 2)
+
+
+def modulus_numbers(a, b):
+    return a % b
+
+
+def exponentiate_numbers(a, b):
+    return a ** b
+
+
+def get_numbers():
+    while True:
+        try:
+            first_number = float(input("Enter first number: "))
+            second_number = float(input("Enter second number: "))
+            return first_number, second_number
+        except ValueError:
+            print("Error: Please enter valid numbers.")
+
+
+def main():
+    print("============================")
+    print("     SIMPLE CALCULATOR")
+    print("============================")
+    print("1. Addition")
+    print("2. Subtraction")
+    print("3. Multiplication")
+    print("4. Division")
+    print("5. Modulus")
+    print("6. Exponentiation")
+    print("7. Quit")
+
+    while True:
+        choice = input("Select an operation (1-7): ").strip()
+
+        if choice == "1":
+            num1, num2 = get_numbers()
+            result = add_numbers(num1, num2)
+            print(f"Result: {num1} + {num2} = {result}")
+        elif choice == "2":
+            num1, num2 = get_numbers()
+            result = subtract_numbers(num1, num2)
+            print(f"Result: {num1} - {num2} = {result}")
+        elif choice == "3":
+            num1, num2 = get_numbers()
+            result = multiply_numbers(num1, num2)
+            print(f"Result: {num1} * {num2} = {result}")
+        elif choice == "4":
+            num1, num2 = get_numbers()
+            try:
+                result = divide_numbers(num1, num2)
+            except ZeroDivisionError as error:
+                print(f"Error: {error}")
+            else:
+                print(f"Result: {num1} / {num2} = {result:.2f}")
+        elif choice == "5":
+            num1, num2 = get_numbers()
+            result = modulus_numbers(num1, num2)
+            print(f"Result: {num1} % {num2} = {result}")
+        elif choice == "6":
+            num1, num2 = get_numbers()
+            result = exponentiate_numbers(num1, num2)
+            print(f"Result: {num1} ** {num2} = {result}")
+        elif choice == "7":
+            print("Goodbye!")
+            break
+        else:
+            print("Error: Invalid selection. Please enter a number from 1 to 7.")
+
+
+if __name__ == "__main__":
+    main()
 
