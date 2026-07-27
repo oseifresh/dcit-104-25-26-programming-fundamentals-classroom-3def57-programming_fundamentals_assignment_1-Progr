@@ -8,50 +8,49 @@
 # Write a Python program that generates multiplication tables using loops
 # and functions.
 #
-# -----------------------------------------------------------------------------
-# PART A — Single Table
-# -----------------------------------------------------------------------------
-# - Ask the user to enter a number.
-# - Print the multiplication table for that number from 1 to 12.
-#
-# Expected output (if user enters 5):
-#
-#   Multiplication Table for 5:
-#   5  x  1  =  5
-#   5  x  2  =  10
-#   5  x  3  =  15
-#   ...
-#   5  x  12 =  60
-#
-# -----------------------------------------------------------------------------
-# PART B — Bonus: Tables from 1 to N
-# -----------------------------------------------------------------------------
-# - Ask the user to enter a number N.
-# - Print the full multiplication table for every number from 1 to N.
-# - Add a separator line (e.g. "---") between each table.
-#
-# Expected output (if user enters 3):
-#
-#   Multiplication Table for 1:
-#   1  x  1  =  1
-#   ...
-#   1  x  12 =  12
-#   ---------------------------
-#   Multiplication Table for 2:
-#   2  x  1  =  2
-#   ...
-#
-# -----------------------------------------------------------------------------
-# REQUIREMENTS
-# -----------------------------------------------------------------------------
-# - N must be a positive integer. If the user enters an invalid value,
-#   print an error message and stop.
-# - Each part must be in its own function (see scaffold below).
-# - Complete Part A before attempting Part B.
-#
 
-#
-# =============================================================================
-# YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
-# =============================================================================
+def print_table(n: int) -> None:
+	"""Print multiplication table for n from 1 to 12."""
+	print(f"Multiplication Table for {n}:")
+	for i in range(1, 13):
+		print(f"{n}  x  {i}  =  {n * i}")
+
+
+def print_tables_to_n(N: int) -> None:
+	"""Print multiplication tables for 1..N, separated by a line."""
+	for num in range(1, N + 1):
+		print_table(num)
+		if num != N:
+			print("---------------------------")
+
+
+def get_positive_int(prompt: str) -> int:
+	try:
+		val = int(input(prompt))
+		if val <= 0:
+			raise ValueError
+		return val
+	except Exception:
+		print("Error: N must be a positive integer.")
+		raise
+
+
+def main() -> None:
+	# Part A — Single Table
+	try:
+		n = get_positive_int("Enter a number for a single table: ")
+	except Exception:
+		return
+	print_table(n)
+
+	# Part B — Tables from 1 to N (bonus)
+	try:
+		N = get_positive_int("Enter N to print tables from 1 to N: ")
+	except Exception:
+		return
+	print_tables_to_n(N)
+
+
+if __name__ == "__main__":
+	main()
 
