@@ -27,55 +27,71 @@
 #
 #   4. Quit
 #      - End the program with a farewell message.
-#
-# -----------------------------------------------------------------------------
-# HOW THE MENU SHOULD LOOK
-# -----------------------------------------------------------------------------
-#
-#   ============================
-#        TO-DO LIST MENU
-#   ============================
-#   1. Add task
-#   2. View tasks
-#   3. Delete task
-#   4. Quit
-#   Enter your choice (1-4):
-#
-# -----------------------------------------------------------------------------
-# EXPECTED INTERACTION EXAMPLE
-# -----------------------------------------------------------------------------
-#
-#   Enter your choice (1-4): 1
-#   Enter task: Buy groceries
-#   Task added: "Buy groceries"
-#
-#   Enter your choice (1-4): 1
-#   Enter task: Study for exams
-#   Task added: "Study for exams"
-#
-#   Enter your choice (1-4): 2
-#   Your Tasks:
-#   1. Buy groceries
-#   2. Study for exams
-#
-#   Enter your choice (1-4): 3
-#   Enter task number to delete: 1
-#   Task "Buy groceries" has been removed.
-#
-#   Enter your choice (1-4): 4
-#   Goodbye!
-#
-# -----------------------------------------------------------------------------
-# REQUIREMENTS
-# -----------------------------------------------------------------------------
-# - Store tasks in a Python list.
-# - Use a loop to keep the menu running until the user chooses to quit.
-# - Each feature MUST be implemented in its own function (see scaffold below).
-# - Handle invalid menu choices gracefully (print an error, do not crash).
-#
 
-#
-# =============================================================================
-# YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
-# =============================================================================
+def display_menu():
+	print("=============================")
+	print("     TO-DO LIST MENU")
+	print("=============================")
+	print("1. Add task")
+	print("2. View tasks")
+	print("3. Delete task")
+	print("4. Quit")
+
+
+def add_task(tasks):
+	task = input("Enter task: ").strip()
+	if task:
+		tasks.append(task)
+		print(f'Task added: "{task}"')
+	else:
+		print("No task entered. Nothing added.")
+
+
+def view_tasks(tasks):
+	if not tasks:
+		print("No tasks in your list.")
+		return
+	print("Your Tasks:")
+	for i, t in enumerate(tasks, start=1):
+		print(f"{i}. {t}")
+
+
+def delete_task(tasks):
+	if not tasks:
+		print("No tasks to delete.")
+		return
+	view_tasks(tasks)
+	choice = input("Enter task number to delete: ").strip()
+	if not choice.isdigit():
+		print("Invalid input. Please enter a number.")
+		return
+	idx = int(choice) - 1
+	if 0 <= idx < len(tasks):
+		removed = tasks.pop(idx)
+		print(f'Task "{removed}" has been removed.')
+	else:
+		print("Invalid task number.")
+
+
+def main():
+	tasks = []
+	while True:
+		display_menu()
+		choice = input("Enter your choice (1-4): ").strip()
+		if choice == '1':
+			add_task(tasks)
+		elif choice == '2':
+			view_tasks(tasks)
+		elif choice == '3':
+			delete_task(tasks)
+		elif choice == '4':
+			print("Goodbye!")
+			break
+		else:
+			print("Invalid choice. Please enter a number between 1 and 4.")
+
+
+if __name__ == '__main__':
+	main()
+
 
